@@ -1,0 +1,52 @@
+#%RAML 1.0
+title: ServiceNow-NRE
+version: 1.0.development
+baseUri: http://localohost:8087/api/
+
+traits:
+  clien-id-required: !include exchange_modules/ce59e7c2-b990-4fe5-98a4-b5dba8efff20/customer-trait/1.0.0/customer-trait.raml
+
+/incident:
+  is:
+    - clien-id-required
+  post:
+    description: Create an incident to handle server issues
+    body:
+      application/json:
+        type: any
+        examples:
+          input: !include /Examples/IncidentExample.raml
+    responses:
+      200:
+        description: Success Message in Creating an Incident
+        body:
+          application/json:
+            example:
+              message: "Successfully Created an Incident"
+      400:
+        description: Error in creation
+        body:
+          application/json:
+            example:
+              message: "Error in Incident creation"
+  get:
+    description: Get details from incident to handle server issues
+    queryParameters:
+      number: 
+       type: string
+       description: Passing Incident Number to get details
+       required: true
+    responses:
+      200:
+        description: Success Message in retrieving an Incident
+        body:
+          application/json:
+            example:
+              message: "Successfully Retrieved an Incident"
+      400:
+        description: Error in creation
+        body:
+          application/json:
+            example:
+              message: "Error in Incident retrieval"
+  
