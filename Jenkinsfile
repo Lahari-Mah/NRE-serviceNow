@@ -26,11 +26,5 @@ pipeline
              sh 'mvn package deploy -DmuleDeploy -DskipTests -Dmule.version=$MULE_VERSION -Danypoint.username=$DEPLOY_CREDS_USR -Danypoint.password=$DEPLOY_CREDS_PSW -Dcloudhub.app=$APP_NAME -Dcloudhub.environment=$ENVIRONMENT -Dcloudhub.worker=$WORKER -Dapikey.id=$APIKEYID -Dapikey.secret=$APIKEYSECRET'
     	}
     }
-    
-    stage('Perform Regression Testing'){
-      steps{
-    		sh 'newman run /Users/rm/Desktop/NjcLabs/newman/getIncident.postman_collection.json'
-    	 }
-    }
   }
 }
